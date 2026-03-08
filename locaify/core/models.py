@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 
 class RepeatMode(Enum):
     NONE = auto()
-    ONCE = auto()
+    ONE = auto()
     ALL = auto()
 
 
@@ -46,27 +46,23 @@ class Track:
     has_liked: bool = False
     date_added: datetime = field(default_factory=datetime.now)
 
+    @property
+    def display_title(self) -> str:
+        return self.title if self.title.strip() else self.path.stem
 
-@property
-def display_title(self) -> str:
-    return self.title if self.title.strip() else self.path.stem
+    @property
+    def display_artist(self) -> str:
+        return self.artist if self.artist.strip() else "Unknown Artist"
 
+    @property
+    def display_album(self) -> str:
+        return self.album if self.album.strip() else "Unknown Album"
 
-@property
-def display_artist(self) -> str:
-    return self.artist if self.artist.strip() else "Unknown Artist"
-
-
-@property
-def display_album(self) -> str:
-    return self.album if self.album.strip() else "Unknown Album"
-
-
-@property
-def duration_formatted(self) -> str:
-    min = int(self.duration // 60)
-    sec = int(self.duration % 60)
-    return f"{min}:{sec:02d}"
+    @property
+    def duration_formatted(self) -> str:
+        min = int(self.duration // 60)
+        sec = int(self.duration % 60)
+        return f"{min}:{sec:02d}"
 
 
 @dataclass

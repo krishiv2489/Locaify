@@ -83,7 +83,7 @@ def _dict_to_config(data: dict) -> LocaifyConfig:
             audio_backend=str(player_data.get("audio_backend", "auto")),
         ),
         library=LibraryConfig(
-            root_dirs=list(library_data.get("root_directories", [])),
+            root_dirs=list(library_data.get("root_dirs", [])),
             watch_for_changes=bool(library_data.get("watch_for_changes", True)),
         ),
         ui=UIConfig(
@@ -101,7 +101,7 @@ def _dict_to_config(data: dict) -> LocaifyConfig:
     )
 
 
-def load_conifg() -> LocaifyConfig:
+def load_config() -> LocaifyConfig:
     config_path = _get_config_path()
 
     if not config_path.exists():

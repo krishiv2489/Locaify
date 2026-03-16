@@ -156,6 +156,6 @@ def test_delete_track_removes_from_library(db: Database) -> None:
 # tests if the exit dunder method closes the db
 def test_context_manager_closes_connection(tmp_path: Path) -> None:
     db_path = tmp_path / "library.db"
-    with Database(db_path) as _:
-        db.insert_track(make_track())
-    assert db._conn is None
+    with Database(db_path) as fresh_db:
+        fresh_db.insert_track(make_track())
+    assert fresh_db._conn is None

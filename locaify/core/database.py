@@ -207,7 +207,7 @@ class Database:
         like_query = f"%{query.strip()}%"
         cursor.execute(
             "SELECT * FROM tracks WHERE title LIKE ? OR album LIKE ? OR artist LIKE ? ORDER BY artist COLLATE NOCASE",
-            (like_query,),
+            (like_query, like_query, like_query),
         )
 
         return [self._row_to_track(row) for row in cursor.fetchall()]

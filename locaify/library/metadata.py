@@ -34,10 +34,12 @@ def read_metadata(path: Path) -> Track:
         from locaify.core.models import Track
 
         return Track(
+            id=0,
             path=path,
             title=path.stem,
             artist="Unknown Artist",
             album="Unknown Album",
+            file_format=suffix.lstrip("."),
             duration=0.0,
         )
 
@@ -82,6 +84,7 @@ def _read_flac(path: Path) -> Track:
         return audio.get(key)
 
     return Track(
+        id=0,
         path=path,
         title=_safe_str(get("title")) or path.stem,
         artist=_safe_str(get("artist")) or "Unknown Artist",
@@ -108,6 +111,7 @@ def _read_ogg(path: Path) -> Track:
         return audio.get(key)
 
     return Track(
+        id=0,
         path=path,
         title=_safe_str(get("title")) or path.stem,
         artist=_safe_str(get("artist")) or "Unknown Artist",
@@ -137,6 +141,7 @@ def _read_mp4(path: Path) -> Track:
         # \xa9 -> escape code for: ©
         # so iTunes stores the name of the song as @nam and artist name as @art
         # But we use escape code instead of hardcore...
+        id=0,
         path=path,
         title=_safe_str(get("\xa9nam")) or path.stem,
         artist=_safe_str(get("\xa9ART")) or "Unknown Artist",
@@ -166,6 +171,7 @@ def _read_wav(path: Path) -> Track:
         return None
 
     return Track(
+        id=0,
         path=path,
         title=_safe_str(get("TIT2")) or path.stem,
         artist=_safe_str(get("TPE1")) or "Unknown Artist",

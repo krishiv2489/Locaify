@@ -58,6 +58,7 @@ def _read_mp3(path: Path) -> Track:
         return None
 
     return Track(
+        id=0,
         path=path,
         title=_safe_str(get("TIT2")) or path.stem,
         artist=_safe_str(get("TPE1")) or "Unknown Artist",

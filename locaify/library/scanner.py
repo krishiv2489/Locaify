@@ -26,7 +26,9 @@ def get_audio_files(root: Path) -> list[Path]:
 
 def scan_directory(
     root: Path, db: Database, max_worker: int = 4
-) -> Generator[ScanProgress, None, None]:
+) -> Generator[
+    ScanProgress, None, None
+]:  # Generator syntax --> Generator[YieldType, SendType, ReturnType]
     from locaify.core.models import ScanProgress
 
     audio_files = get_audio_files(root)
